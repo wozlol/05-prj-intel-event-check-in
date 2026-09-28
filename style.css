@@ -266,6 +266,70 @@ button .fas {
   margin: 0 2px;
 }
 
+/* Celebration banner */
+.celebration-banner {
+  max-width: 700px;
+  width: 90%;
+  margin: 0 auto 24px;
+  padding: 18px 24px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #0071c5, #00aeef);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 113, 197, 0.25);
+}
+
+/* Attendee list */
+.attendee-list-section {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid #f1f5f9;
+  text-align: left;
+}
+
+.attendee-list-section h3 {
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.attendee-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.attendee-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border-left: 4px solid #0071c5;
+  background-color: #f8fafc;
+}
+
+.attendee-item.water { border-left-color: #00aeef; background-color: #e8f7fc; }
+.attendee-item.zero { border-left-color: #16a34a; background-color: #ecfdf3; }
+.attendee-item.power { border-left-color: #f97316; background-color: #fff7ed; }
+
+.attendee-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.attendee-team {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+}
+
 /* Footer */
 .footer {
   text-align: center;
