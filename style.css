@@ -289,11 +289,70 @@ button .fas {
   text-align: left;
 }
 
+.attendee-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
 .attendee-list-section h3 {
   color: #64748b;
   font-size: 16px;
-  margin-bottom: 15px;
-  text-align: center;
+  margin: 0;
+}
+
+.attendee-list-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.download-btn,
+.clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0 16px;
+  min-width: auto;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.download-btn {
+  color: #0071c5;
+  border: 2px solid rgba(0, 113, 197, 0.2);
+}
+
+.download-btn:hover {
+  background-color: #0071c5;
+  color: white;
+  transform: none;
+  box-shadow: 0 4px 12px rgba(0, 113, 197, 0.2);
+}
+
+.clear-btn {
+  color: #dc2626;
+  border: 2px solid rgba(220, 38, 38, 0.2);
+}
+
+.clear-btn:hover {
+  background-color: #dc2626;
+  color: white;
+  transform: none;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.download-btn .fas,
+.clear-btn .fas {
+  margin-right: 0;
+  font-size: 13px;
 }
 
 .attendee-list {

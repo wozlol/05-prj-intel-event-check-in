@@ -84,7 +84,17 @@
       </div>
 
       <div class="attendee-list-section">
-        <h3>Attendee List</h3>
+        <div class="attendee-list-header">
+          <h3>Attendee List</h3>
+          <div class="attendee-list-actions">
+            <button type="button" id="downloadCsvBtn" class="download-btn">
+              <i class="fas fa-download"></i> Download CSV
+            </button>
+            <button type="button" id="clearListBtn" class="clear-btn">
+              <i class="fas fa-trash"></i> Clear List
+            </button>
+          </div>
+        </div>
         <ul id="attendeeList" class="attendee-list"></ul>
       </div>
     </div>

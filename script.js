@@ -15,6 +15,8 @@ const attendeeCountEl = document.getElementById('attendeeCount');
 const progressBarEl = document.getElementById('progressBar');
 const celebrationEl = document.getElementById('celebrationBanner');
 const attendeeListEl = document.getElementById('attendeeList');
+const downloadCsvBtn = document.getElementById('downloadCsvBtn');
+const clearListBtn = document.getElementById('clearListBtn');
 
 const teamCountEls = {
   water: document.getElementById('waterCount'),
@@ -137,6 +139,54 @@ function handleCheckIn(event) {
   nameInput.focus();
 }
 
+function escapeCsvField(value) {
+  const stringValue = String(value);
+  if (/[",\n]/.test(stringValue)) {
+    return `"${stringValue.replace(/"/g, '""')}"`;
+  }
+  return stringValue;
+}
+
+function downloadAttendeeCsv() {
+  const rows = [
+    ['Name', 'Team'],
+    ...state.attendees.map((attendee) => [attendee.name, TEAM_LABELS[attendee.team]]),
+  ];
+  const csvContent = rows.map((row) => row.map(escapeCsvField).join(',')).join('\n');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'attendee-list.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+function clearAttendeeList() {
+  const confirmed = window.confirm(
+    'Clear the attendee list? This resets the attendee list, attendance count, and team totals, and cannot be undone.'
+  );
+  if (!confirmed) return;
+
+  state = {
+    total: 0,
+    teams: { water: 0, zero: 0, power: 0 },
+    attendees: [],
+    celebrated: false,
+  };
+
+  saveState();
+  renderAll();
+  celebrationEl.hidden = true;
+  greetingEl.style.display = 'none';
+}
+
 loadState();
 renderAll();
 form.addEventListener('submit', handleCheckIn);
+downloadCsvBtn.addEventListener('click', downloadAttendeeCsv);
+clearListBtn.addEventListener('click', clearAttendeeList);
