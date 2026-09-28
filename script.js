@@ -17,6 +17,12 @@ const celebrationEl = document.getElementById('celebrationBanner');
 const attendeeListEl = document.getElementById('attendeeList');
 const downloadCsvBtn = document.getElementById('downloadCsvBtn');
 const clearListBtn = document.getElementById('clearListBtn');
+const adminMenuToggle = document.getElementById('adminMenuToggle');
+const adminMenu = document.getElementById('adminMenu');
+const passwordModalOverlay = document.getElementById('passwordModalOverlay');
+const adminPasswordInput = document.getElementById('adminPassword');
+const passwordOkBtn = document.getElementById('passwordOkBtn');
+const passwordCancelBtn = document.getElementById('passwordCancelBtn');
 
 const teamCountEls = {
   water: document.getElementById('waterCount'),
@@ -185,8 +191,67 @@ function clearAttendeeList() {
   greetingEl.style.display = 'none';
 }
 
+function openPasswordModal() {
+  adminPasswordInput.value = '';
+  passwordModalOverlay.hidden = false;
+  adminPasswordInput.focus();
+}
+
+function closePasswordModal() {
+  passwordModalOverlay.hidden = true;
+}
+
+function openAdminMenu() {
+  adminMenu.hidden = false;
+  adminMenuToggle.setAttribute('aria-expanded', 'true');
+}
+
+function closeAdminMenu() {
+  adminMenu.hidden = true;
+  adminMenuToggle.setAttribute('aria-expanded', 'false');
+}
+
+adminMenuToggle.addEventListener('click', () => {
+  if (!adminMenu.hidden) {
+    closeAdminMenu();
+    return;
+  }
+  openPasswordModal();
+});
+
+passwordOkBtn.addEventListener('click', (event) => {
+  // Stop this click from also reaching the outside-click handler below,
+  // which would otherwise close the menu the instant it opens.
+  event.stopPropagation();
+  closePasswordModal();
+  openAdminMenu();
+});
+
+passwordCancelBtn.addEventListener('click', closePasswordModal);
+
+adminPasswordInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    passwordOkBtn.click();
+  }
+});
+
+document.addEventListener('click', (event) => {
+  const clickedInsideMenu = adminMenu.contains(event.target);
+  const clickedToggle = adminMenuToggle.contains(event.target);
+  if (!adminMenu.hidden && !clickedInsideMenu && !clickedToggle) {
+    closeAdminMenu();
+  }
+});
+
 loadState();
 renderAll();
 form.addEventListener('submit', handleCheckIn);
-downloadCsvBtn.addEventListener('click', downloadAttendeeCsv);
-clearListBtn.addEventListener('click', clearAttendeeList);
+downloadCsvBtn.addEventListener('click', () => {
+  downloadAttendeeCsv();
+  closeAdminMenu();
+});
+clearListBtn.addEventListener('click', () => {
+  clearAttendeeList();
+  closeAdminMenu();
+});

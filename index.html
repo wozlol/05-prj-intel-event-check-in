@@ -12,6 +12,33 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Admin menu -->
+    <button id="adminMenuToggle" class="admin-menu-toggle" aria-label="Admin menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="adminMenu" class="admin-menu" hidden>
+      <button type="button" id="downloadCsvBtn" class="download-btn">
+        <i class="fas fa-download"></i> Download CSV
+      </button>
+      <button type="button" id="clearListBtn" class="clear-btn">
+        <i class="fas fa-trash"></i> Clear List
+      </button>
+    </div>
+
+    <div id="passwordModalOverlay" class="password-modal-overlay" hidden>
+      <div class="password-modal" role="dialog" aria-labelledby="passwordModalTitle" aria-modal="true">
+        <h3 id="passwordModalTitle">Admin Access</h3>
+        <p class="password-modal-text">Enter the admin password to manage the attendee list.</p>
+        <label for="adminPassword" class="password-label">Password</label>
+        <input type="password" id="adminPassword" placeholder="TEST JUST CLICK OK" autocomplete="off" />
+        <div class="password-modal-actions">
+          <button type="button" id="passwordCancelBtn" class="password-cancel-btn">Cancel</button>
+          <button type="button" id="passwordOkBtn" class="password-ok-btn">OK</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero section with Intel branding -->
     <div class="hero">
       <div class="hero-content">
@@ -84,17 +111,7 @@
       </div>
 
       <div class="attendee-list-section">
-        <div class="attendee-list-header">
-          <h3>Attendee List</h3>
-          <div class="attendee-list-actions">
-            <button type="button" id="downloadCsvBtn" class="download-btn">
-              <i class="fas fa-download"></i> Download CSV
-            </button>
-            <button type="button" id="clearListBtn" class="clear-btn">
-              <i class="fas fa-trash"></i> Clear List
-            </button>
-          </div>
-        </div>
+        <h3>Attendee List</h3>
         <ul id="attendeeList" class="attendee-list"></ul>
       </div>
     </div>
