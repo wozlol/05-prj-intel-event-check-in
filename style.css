@@ -365,6 +365,10 @@ button .fas {
   box-shadow: none;
 }
 
+.admin-menu-toggle .fas {
+  margin-right: 0;
+}
+
 .admin-menu {
   position: fixed;
   top: 72px;
